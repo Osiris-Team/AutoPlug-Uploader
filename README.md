@@ -9,7 +9,7 @@ Installation:
 
 1. Download the [AutoPlugUploader.jar](https://link) and place it into a new empty directory
 2. Create a startup script that runs the program (java -jar AutoPlugUploader.jar)
-3. Go through the setup and enter the needed details (see config)
+3. Go through the setup and enter the needed details (see [config](https://github.com/Osiris-Team/AutoPlug-Uploader/blob/master/README.md#example-configuration))
 4. Done!
 
 App workflow:
