@@ -51,8 +51,8 @@ autoplug-uploader-config:
     #Enter - none if you dont need to specify the launcher class for that file.
     #The order must be the same, aswell as the amount(If you got 6 files you need 6x - none in this list).
     launchers:
-    - com.osiris.autoplug.launcher.Main
     - none
+    - com.osiris.autoplug.launcher.Main
     - none
     
   user:
