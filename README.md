@@ -41,9 +41,18 @@ autoplug-uploader-config:
     
     #The files to upload. Full name with file-extension required.
     upload-files-names:
+    - AutoPlugLauncher.jar
     - AutoPlug.jar
     - AutoPlugPlugin.jar
-    - AutoPlugLauncher.jar
+    
+    
+    #Enter your launcher class here if you need to specify it.
+    #Enter - none if you dont need to specify the launcher class for that file.
+    #The order must be the same, aswell as the amount(If you got 6 files you need 6x - none in this list).
+    launchers:
+    - com.osiris.autoplug.launcher.Main
+    - none
+    - none
     
   user:
     #The download directory of your user. This is where the update gets downloaded to.
