@@ -1,7 +1,7 @@
 # AutoPlug-Uploader
 
 ### What it does?
-It heavily simplifies using update4j to update your java program. The Uploader will create the needed configuration xml files and upload them together with your jar to github.
+It simplifies updating your java app via [update4j](https://github.com/update4j/update4j/). The Uploader will create the needed configuration xml files and upload them together with your jar to github.
 
 Installation:
  - (Optional) Create a new repository only for your release files
@@ -9,7 +9,7 @@ Installation:
 
 1. Download the [AutoPlugUploader.jar](https://link) and place it into a new empty directory
 2. Create a startup script that runs the program (java -jar AutoPlugUploader.jar)
-3. Go through the setup and enter the needed details (Config explained here)
+3. Go through the setup and enter the needed details (see [config](https://github.com/Osiris-Team/AutoPlug-Uploader/blob/master/README.md#example-configuration))
 4. Done!
 
 App workflow:
@@ -21,6 +21,8 @@ App workflow:
 
 Usage examples:
 You have a new version of your java app ready? Copy the jar to /upload folder, run the Uploader and you are done! Just as simple as that. Now all your users will be able to update the new version.
+
+If you want to know how your users download the update, go over to the [AutoPlug-Launcher](https://github.com/Osiris-Team/AutoPlug-Launcher) repo.
 
 ## Example Configuration
 ```yml
@@ -41,9 +43,17 @@ autoplug-uploader-config:
     
     #The files to upload. Full name with file-extension required.
     upload-files-names:
+    - AutoPlugLauncher.jar
     - AutoPlug.jar
     - AutoPlugPlugin.jar
-    - AutoPlugLauncher.jar
+    
+    #Enter your launcher class here if you need to specify it.
+    #Enter - none if you dont need to specify the launcher class for that file.
+    #The order must be the same, aswell as the amount(If you got 6 files you need 6x - none in this list).
+    launchers:
+    - com.osiris.autoplug.launcher.Main
+    - none
+    - none
     
   user:
     #The download directory of your user. This is where the update gets downloaded to.
