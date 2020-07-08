@@ -2,8 +2,8 @@
 A tool to simplify the updating with update4j
 
 Installation:
-(Optional) Create a new repository only for your release files
-(Prerequisite) Create a personal access token with permissions to write/delete files
+ - (Optional) Create a new repository only for your release files
+ - (Prerequisite) Create a personal access token with permissions to write/delete files
 
 1. Download the [AutoPlugUploader.jar](https://link) and place it into a new empty directory
 2. Create a startup script that runs the program (java -jar AutoPlugUploader.jar)
