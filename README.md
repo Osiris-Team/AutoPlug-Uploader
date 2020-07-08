@@ -22,6 +22,8 @@ App workflow:
 Usage examples:
 You have a new version of your java app ready? Copy the jar to /upload folder, run the Uploader and you are done! Just as simple as that. Now all your users will be able to update the new version.
 
+If you want to know how your users download the update, go over to the [AutoPlug-Launcher](https://github.com/Osiris-Team/AutoPlug-Launcher) repo.
+
 ## Example Configuration
 ```yml
 autoplug-uploader-config:
