@@ -1,7 +1,7 @@
 # AutoPlug-Uploader
 
 ### What it does?
-It heavily simplifies using update4j to update your java program. The Uploader will create the needed configuration xml files and upload them together with your jar to github.
+It simplifies updating your java app via update4j. The Uploader will create the needed configuration xml files and upload them together with your jar to github.
 
 Installation:
  - (Optional) Create a new repository only for your release files
