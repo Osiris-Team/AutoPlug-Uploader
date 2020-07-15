@@ -8,9 +8,9 @@ Installation:
  - (Prerequisite) Create a personal access token with permissions to write/delete files
 
 1. Download the [AutoPlugUploader.jar](https://link) and place it into a new empty directory
-2. Create a startup script that runs the program (java -jar AutoPlugUploader.jar)
+2. Create a startup script and run the program (java -jar AutoPlugUploader.jar)
 3. Go through the setup and enter the needed details (see [config](https://github.com/Osiris-Team/AutoPlug-Uploader/blob/master/README.md#example-configuration))
-4. Place your files into /upload
+4. Place your files into the new generated folder /upload
 5. Restart AutoPlug-Uploader
 6. Done!
 
