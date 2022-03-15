@@ -8,11 +8,13 @@
 
 package com.osiris.autoplug.uploader;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -69,9 +71,19 @@ public class UpdateJson {
         obj.addProperty("file-size", fileSize);
         obj.addProperty("main-class", mainClass);
 
-        File updateJson = new File(dir + "/update.json");
-        updateJson.createNewFile();
-        Files.write(updateJson.toPath(), new GsonBuilder().setPrettyPrinting().create().toJson(obj).getBytes(StandardCharsets.UTF_8));
+        File file = new File(dir + "/update.json");
+        file.createNewFile();
+        JsonObject existingUpdateJson = new Gson().fromJson(new FileReader(file), JsonObject.class);
+        if (existingUpdateJson.get("id").getAsString().equals(id) &&
+                existingUpdateJson.get("installation-path").getAsString().equals(installationPath) &&
+                existingUpdateJson.get("version").getAsString().equals(version) &&
+                existingUpdateJson.get("download-url").getAsString().equals(downloadUrl) &&
+                existingUpdateJson.get("sha-256").getAsString().equals(sha256) &&
+                existingUpdateJson.get("file-size").getAsLong() == fileSize &&
+                existingUpdateJson.get("main-class").getAsString().equals(mainClass)) {
+            System.err.println("No update.json generated since it already exists with the same content. "+file);
+        } else
+            Files.write(file.toPath(), new GsonBuilder().setPrettyPrinting().create().toJson(obj).getBytes(StandardCharsets.UTF_8));
         return obj;
     }
 
