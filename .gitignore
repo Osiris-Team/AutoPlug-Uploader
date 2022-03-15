@@ -1,0 +1,18 @@
+**/target/
+**/AP-TEST-SERVER/
+/autoplug
+/test
+
+# IDEA
+**/.idea/
+**/*.iml
+
+# MacOS
+.DS_Store
+
+# Eclipse
+.settings
+.classpath
+.project
+
+!AutoPlug-Uploader.jar

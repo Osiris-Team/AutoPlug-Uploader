@@ -1,64 +1,25 @@
 # AutoPlug-Uploader
+Upload updates to [AutoPlug-Releases](https://github.com/Osiris-Team/AutoPlug-Client) 
+with an auto-generated update.json file easily.
 
-### What it does?
-It simplifies updating your java app via [update4j](https://github.com/update4j/update4j/). The Uploader will create the needed configuration xml files and upload them together with your jar to github.
+### Why?
+The update.json file contains extra necessary information like the installation path of
+the jar or the main classes' path.
 
-Installation:
- - (Optional) Create a new repository only for your release files
- - (Prerequisite) Create a personal access token with permissions to write/delete files
-
-1. Download the [AutoPlugUploader.jar](https://link) and place it into a new empty directory
-2. Create a startup script and run the program (java -jar AutoPlugUploader.jar)
-3. Go through the setup and enter the needed details (see [config](https://github.com/Osiris-Team/AutoPlug-Uploader/blob/master/README.md#example-configuration))
-4. Place your files into the new generated folder /upload
-5. Restart AutoPlug-Uploader
-6. Done!
-
-App workflow:
-1. Starts up and checks if /upload dir exists (If not you will be prompted to go through the setup)
-2. Reads the configuration yml file and extracts its values
-3. Checks if all the files you want to upload (listed in the config) can be found at /upload
-4. Creates the update configuration xml files (in /upload)
-5. Uploads all the files located in /upload to your choosen GitHub repository
-
-Usage examples:
-You have a new version of your java app ready? Copy the jar to /upload folder, run the Uploader and you are done! Just as simple as that. Now all your users will be able to update the new version.
-
-If you want to know how your users download the update, go over to the [AutoPlug-Launcher](https://github.com/Osiris-Team/AutoPlug-Launcher) repo.
 
 ## Example Configuration
 ```yml
-autoplug-uploader-config:
-
-  github:
-    #Enter your personal access token or oauth token
-    o-auth: enter_here
-    
-    #The repository where to upload the files
-    releases-repo: Osiris-Team/AutoPlug-Releases
-    
-    #The branch
+# Insert your O_AUTH access token here.
+# Token needs to have permissions to push/commit on the desired repos.
+access-token: INSERT_HERE
+repos:
+  # Repository name: <author>/<repo>
+  Osiris-Team/AutoPlug-Releases:
     branch: master
-    
-    #The directory where to upload your files.
-    upload-dir: beta-builds
-    
-    #The files to upload. Full name with file-extension required.
-    upload-files-names:
-    - AutoPlugLauncher.jar
-    - AutoPlug.jar
-    - AutoPlugPlugin.jar
-    
-    #Enter your launcher class here if you need to specify it.
-    #Enter - none if you dont need to specify the launcher class for that file.
-    #The order must be the same, aswell as the amount(If you got 6 files you need 6x - none in this list).
-    launchers:
-    - none
-    - com.osiris.autoplug.launcher.Main
-    - none
-    
-  user:
-    #The download directory of your user. This is where the update gets downloaded to.
-    downloads-dir: autoplug-system
-
+    replacement:
+      - ./stable/AutoPlug-Client.jar # ./ is the current directory
+      - ./beta/AutoPlug-Client.jar 
+    to-replace:
+      - /stable-builds/AutoPlug-Client.jar
+      - /beta-builds/AutoPlug-Client.jar
 ```
