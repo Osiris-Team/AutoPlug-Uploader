@@ -6,6 +6,9 @@ with an auto-generated update.json file easily.
 The update.json file contains extra necessary information like the installation path of
 the jar or the main classes' path.
 
+# Installation
+- Download the [AutoPlug-Uploader.jar](AutoPlug-Uploader.jar) and put it into a empty directory.
+- Create a config.yml in that directory and use the preset below.
 
 ## Example Configuration
 ```yml
