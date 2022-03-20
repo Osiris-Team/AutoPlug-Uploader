@@ -8,9 +8,7 @@
 
 package com.osiris.autoplug.uploader;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -73,7 +71,12 @@ public class UpdateJson {
 
         File file = new File(dir + "/update.json");
         file.createNewFile();
-        JsonObject existingUpdateJson = new Gson().fromJson(new FileReader(file), JsonObject.class);
+        JsonObject existingUpdateJson = null;
+        for (JsonElement el : new Gson().fromJson(new FileReader(file), JsonArray.class)){
+            if(el.getAsJsonObject().get("id").getAsInt() == 0)
+                existingUpdateJson = el.getAsJsonObject();
+        }
+        if(existingUpdateJson == null) throw new Exception("Failed to find update json with id==0!");
         if (existingUpdateJson.get("id").getAsString().equals(id) &&
                 existingUpdateJson.get("installation-path").getAsString().equals(installationPath) &&
                 existingUpdateJson.get("version").getAsString().equals(version) &&
