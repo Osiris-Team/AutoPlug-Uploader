@@ -34,7 +34,7 @@ public class UpdateJson {
      * @param dir            path to the directory in which the update.json file should be created.
      * @return the generated update.json as {@link JsonObject}.
      */
-    public JsonObject create(RepoDetail repoDetail, String propertiesFile, RFile jar, File dir) throws Exception {
+    public JsonArray create(RepoDetail repoDetail, String propertiesFile, RFile jar, File dir) throws Exception {
         Properties p = getProperties(propertiesFile, jar.fileTarget);
         String id = p.getProperty("id");
         String installationPath = p.getProperty("installation-path");
@@ -72,10 +72,13 @@ public class UpdateJson {
         File file = new File(dir + "/update.json");
         file.createNewFile();
         JsonObject existingUpdateJson = null;
-        for (JsonElement el : new Gson().fromJson(new FileReader(file), JsonArray.class)){
-            if(el.getAsJsonObject().get("id").getAsInt() == 0)
-                existingUpdateJson = el.getAsJsonObject();
-        }
+        JsonArray jsonElements = null;
+        try{jsonElements = new Gson().fromJson(new FileReader(file), JsonArray.class);} catch (Exception e) {}
+        if(jsonElements != null)
+        for (JsonElement el : jsonElements){
+                if(el.getAsJsonObject().get("id").getAsInt() == 0)
+                    existingUpdateJson = el.getAsJsonObject();
+            }
         if(existingUpdateJson == null) throw new Exception("Failed to find update json with id==0!");
         if (existingUpdateJson.get("id").getAsString().equals(id) &&
                 existingUpdateJson.get("installation-path").getAsString().equals(installationPath) &&
@@ -87,7 +90,10 @@ public class UpdateJson {
             System.err.println("No update.json generated since it already exists with the same content. "+file);
         } else
             Files.write(file.toPath(), new GsonBuilder().setPrettyPrinting().create().toJson(obj).getBytes(StandardCharsets.UTF_8));
-        return obj;
+
+        JsonArray arr = new JsonArray();
+        arr.add(obj);
+        return arr;
     }
 
     private String bytesToHex(byte[] hash) {

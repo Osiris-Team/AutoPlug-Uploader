@@ -8,6 +8,7 @@
 
 package com.osiris.autoplug.uploader;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.diff.DiffEntry;
@@ -59,8 +60,8 @@ public class Main {
                 System.out.println("Replacing: "+rFile.fileTarget);
                 System.out.println("with: "+rFile.fileSource);
                 Files.copy(rFile.fileSource.toPath(), rFile.fileTarget.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                JsonObject updateJson = new UpdateJson().create(repoDetail, "autoplug.properties", rFile, rFile.fileTarget.getParentFile());
-                String msg = "Updated " + rFile.fileTarget.getName() + " to " + updateJson.get("version").getAsString() + ".";
+                JsonArray updateJson = new UpdateJson().create(repoDetail, "autoplug.properties", rFile, rFile.fileTarget.getParentFile());
+                String msg = "Updated " + rFile.fileTarget.getName() + " to " + updateJson.get(0).getAsJsonObject().get("version").getAsString() + ".";
                 List<DiffEntry> diffEntries = git.diff().call();
                 if(diffEntries == null || diffEntries.isEmpty())
                     System.err.println("No commit since unchanged file: "+rFile.fileTarget);
